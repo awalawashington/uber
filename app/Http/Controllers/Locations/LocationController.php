@@ -32,7 +32,7 @@ class LocationController extends Controller
     $from = Location::find($request->input('from'));
     $to = Location::find($request->input('to'));
     $distance = $this->distance($request->input('from'), $request->input('to'));  
-    $price = $distance  * 60;
+    $price = $distance  * 40;
  
   $taxi_location = TaxiLocation::all();
 
