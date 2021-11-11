@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Students\Auth;
 
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserVerificationCode;
@@ -92,11 +93,11 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|min:10|numeric',
+            'phone_number' => 'required|min:10|numeric|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'registration_number' => 'required|string',
+            'registration_number' => 'required|string|unique:users',
             'password' => ['required', 'confirmed',
                 Password::min(8)
                     ->mixedCase()
@@ -106,6 +107,16 @@ class RegisterController extends Controller
                     ->uncompromised(),
             ]
         ]);
+
+        if ($validator->fails()) {
+            $arr = Arr::flatten($data);
+          
+            session(['email' => $arr[1]]);
+        }
+
+        
+
+        return $validator;
     }
 
     /**

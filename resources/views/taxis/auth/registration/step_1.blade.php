@@ -29,10 +29,10 @@
   <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 
   <style>
-  #header, #header.header-inner-pages {
-    background: rgba(0, 0, 0, 0.8);
-}
-</style>
+    #header{
+      background-color:rgba(0, 0, 0, 0.8) !important;
+    }
+  </style>
 </head>
 
 <body>

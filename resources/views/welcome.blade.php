@@ -23,7 +23,8 @@
           <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="taxi-registration/step_1">Become a Driver</a></li>
+          <li><a class="nav-link scrollto " href="/admin-login">Admin</a></li>
+          <li><a class="nav-link scrollto" href="/taxi-registration/step_1">Become a Driver</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

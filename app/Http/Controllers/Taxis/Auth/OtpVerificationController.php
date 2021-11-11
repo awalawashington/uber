@@ -70,16 +70,16 @@ class OtpVerificationController extends Controller
         $email = TaxiVerificationCode::where('email' ,$request->email)->latest()->first();
 
         if (Carbon::now()->gt($email->email_verification_code_expires_at)) {
-            return "code expired";
+            return redirect()->route('taxi.registration.step_2')->with('fail','Verification Code expired');
         }
       
         if ($request->email_verification_code !== $email->email_verification_code) {
-            return "invalid code";
+            return redirect()->route('taxi.registration.step_2')->with(['fail' =>'Incorrect Code', 'taxi_email' => $email]);
         }
 
         
 
-        return redirect('taxi-registration/step_3')->with('taxi_email', $email);
+        return redirect('taxi-registration/step_3')->with('taxi_email', $email->email);
     }
 
     

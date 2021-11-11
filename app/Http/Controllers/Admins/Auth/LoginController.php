@@ -40,6 +40,11 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
+    public function login_view()
+    {
+        return view('admins/auth/login');
+    }
+
     public function login(Request $request)
     {
         $this->validate($request, [

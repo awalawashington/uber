@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Taxis\Auth;
 
 use App\Models\Taxi;
+use Illuminate\Support\Arr;
 use App\Models\TaxiLocation;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -92,11 +93,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|min:10|numeric',
+            'phone_number' => 'required|min:10|numeric|unique:taxis', 
             'email' => 'required|string|email|max:255|unique:taxis',
-            'vehicle_registration_number' => 'required|string',
+            'vehicle_registration_number' => 'required|string|unique:taxis',
             'vehicle_type' => 'required|string',
             'vehicle_color' => 'required|string',
             'password' => ['required', 'confirmed',
@@ -108,6 +109,16 @@ class RegisterController extends Controller
                     ->uncompromised(),
             ]
         ]);
+
+        if ($validator->fails()) {
+            $arr = Arr::flatten($data);
+          
+            session(['taxi_email' => $arr[1]]);
+        }
+
+        
+
+        return $validator;
     }
 
     /**

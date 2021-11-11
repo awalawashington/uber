@@ -21,14 +21,14 @@
         <div class="row mb-3">
             <div class="info-box col-md-6 border">
                 <i class="ri-login-circle-line"></i>
-                <h3>?</h3>
+                <h3>{{auth()->user('taxi')->rides->count()}}</h3>
                 <p>Number of rides</p>
             </div>
 
 
             <div class="info-box col-md-6 border">
                 <i class="ri-login-circle-line"></i>
-                <h3>?Kms</h3>
+                <h3>{{auth()->user('taxi')->rides->sum('distance')}} Kms</h3>
                 <p>Distance Covered</p>
             </div>
      
@@ -37,13 +37,13 @@
            
         </div>
 
-        @if((auth('taxi')->user()->ride_confirmations()) !== NULL)
-        @if((auth('taxi')->user()->ride_confirmations()->confirmation) == NULL)
+        @if((auth()->user('taxi')->ride_confirmations()) !== NULL)
+        @if((auth()->user('taxi')->ride_confirmations()->confirmation) == NULL)
         <div class="row mt-3">
             <article class="card shadow bg-white rounded">
                 <section class="date">
                     <time datetime="23th feb">
-                    <span>200</span><span>Ksh</span>
+                    <span>{{auth()->user('taxi')->ride_confirmations()->ride->price}}</span><span>Ksh</span>
                     </time>
                 </section>
                 <section class="card-cont">
@@ -59,7 +59,7 @@
                     <div class="even-info">
                     <i class="fa fa-map-marker"></i>
                     <p>
-                        <b>{{auth('taxi')->user()->ride_confirmations()->ride->from_location->name}}</b> To <b>{{auth('taxi')->user()->ride_confirmations()->ride->to_location->name}}</b>, <b>{{auth('taxi')->user()->ride_confirmations()->ride->distance}}</b>
+                        <b>{{auth('taxi')->user()->ride_confirmations()->ride->from_location->name}}</b> To <b>{{auth('taxi')->user()->ride_confirmations()->ride->to_location->name}}</b>, <b>{{auth()->user('taxi')->ride_confirmations()->ride->distance}}</b>
                     </p>
                     </div>
                     <form action="accept-ride" method="POST">
@@ -76,7 +76,7 @@
             <article class="card shadow bg-white rounded">
             <section class="date">
                     <time datetime="23th feb">
-                    <span>200</span><span>Ksh</span>
+                    <span>{{auth('taxi')->user()->ride_confirmations()->ride->price}}</span><span>Ksh</span>
                     </time>
                 </section>
                 <section class="card-cont">
@@ -92,7 +92,7 @@
                     <div class="even-info">
                     <i class="fa fa-map-marker"></i>
                     <p>
-                        <b>{{auth('taxi')->user()->ride_confirmations()->ride->from_location->name}}</b> To <b>{{auth('taxi')->user()->ride_confirmations()->ride->to_location->name}}</b>, <b>460Kms</b>
+                        <b>{{auth('taxi')->user()->ride_confirmations()->ride->from_location->name}}</b> To <b>{{auth('taxi')->user()->ride_confirmations()->ride->to_location->name}}</b>, <b>{{auth('taxi')->user()->ride_confirmations()->ride->distance}} Kms</b>
                     </p>
                     </div>
                     <form action="complete-ride" method="POST">

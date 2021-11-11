@@ -78,7 +78,11 @@
                             <p class="text-danger">{{ session('email')->email_verification_code }}</p>
                             </div>
                         </div>
-
+                        @if (session('fail'))
+                        <div class="alert alert-danger" role="alert">
+                        {{ session('fail') }}!
+                        </div>
+                        @endif
                         <form action="/student-registration/step_2" method="post" role="form" class="form">
                         @csrf
                             <input type="hidden" name="email" value="{{ session('email')->email }}">

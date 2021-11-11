@@ -36,7 +36,7 @@ Route::group(['middleware' => ['guest']], function()
     Route::get('student-registration/step_3',[RegisterController::class ,'register_view'])->name('student.registration');
     Route::post('student-registration/step_3',[RegisterController::class ,'register']);
 
-    Route::get('student-reset-password/step_1',[ForgotPasswordController::class ,'request_otp_view']);
+    Route::get('student-reset-password/step_1',[ForgotPasswordController::class ,'request_otp_view'])->name('password');
     Route::post('student-reset-password/step_1',[ForgotPasswordController::class ,'request_otp']);
     Route::get('student-reset-password/step_2',[ForgotPasswordController::class ,'verify_otp_view']);
     Route::post('student-reset-password/step_2',[ForgotPasswordController::class ,'verify_otp']);

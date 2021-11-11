@@ -5,9 +5,12 @@
   <!-- About -->
   @include('layouts.ticketcss')
   <!-- /.about -->
+  <style>
+    #header{
+      background-color:rgba(0, 0, 0, 0.8) !important;
+    }
+  </style>
 </head>
-</head>
-
 <body>
 
    <!-- ======= Header ======= -->
@@ -25,6 +28,7 @@
           <li><a class="nav-link scrollto" href="/#about">About</a></li>
           <li><a class="nav-link scrollto " href="/#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="/student-registration/step_1">Register as a student</a></li>
+          <li><a class="nav-link scrollto " href="/taxi-reset-password/step_1">Reset Password</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -49,6 +53,11 @@
                             <p>Login to see ride requests</p>
                             </div>
                         </div>
+                        @if (session('fail'))
+                        <div class="alert alert-danger" role="alert">
+                        {{ session('fail') }}!
+                        </div>
+                        @endif
                         <form action="/taxi-login" method="post" role="form" class="form">
                         @csrf
                             <div class="form-group mt-3">

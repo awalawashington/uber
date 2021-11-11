@@ -76,10 +76,19 @@
                             <p>You are almost there. Fill out the form then submit</p>
                             </div>
                         </div>
+                        @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-octagon me-1"></i>
+                    {{ $error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endforeach
+              @endif
                         <form action="/taxi-registration/step_3" method="post" role="form" class="form">
                         @csrf
 
-                            <input type="hidden" name="email" value="{{ session('taxi_email')->email }}">
+                            <input type="hidden" name="email" value="{{ session('taxi_email') }}">
     
                             <div class="row">
                                 <div class="col-md-6 form-group">

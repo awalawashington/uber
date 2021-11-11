@@ -2,14 +2,12 @@
 @section('content')
 
   <title>TUM TAXI | KARIBU</title>
-  <!-- About -->
-  @include('layouts.ticketcss')
-  <!-- /.about -->
-<style>
-  #header, #header.header-inner-pages {
-    background: rgba(0, 0, 0, 0.8);
-}
-</style>
+
+  <style>
+    #header{
+      background-color:rgba(0, 0, 0, 0.8) !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,6 +27,7 @@
           <li><a class="nav-link scrollto" href="/#about">About</a></li>
           <li><a class="nav-link scrollto " href="/#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="/taxi-registration/step_1">Become a Driver</a></li>
+          <li><a class="nav-link scrollto " href="/student-reset-password/step_1">Reset Password</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -35,7 +35,7 @@ class OtpVerificationController extends Controller
             'email_verification_code_expires_at' => Carbon::now()->addMinutes(30)->timestamp,
         ]);
 
-        $this->sendMail($email);
+        //$this->sendMail($email);
 
         return redirect('student-registration/step_2')->with('email', $email);
 
@@ -72,15 +72,16 @@ class OtpVerificationController extends Controller
 
         $email = UserVerificationCode::where('email' ,$request->email)->latest()->first();
 
+
         if (Carbon::now()->gt($email->email_verification_code_expires_at)) {
-            return "code expired";
+            return redirect()->route('student.registration.step_2')->with('fail','Verification Code expired');
         }
       
         if ($request->email_verification_code !== $email->email_verification_code) {
-            return "invalid code";
+            return redirect()->route('student.registration.step_2')->with(['fail' =>'Incorrect Code', 'email' => $email]);
         }
 
-        return redirect('student-registration/step_3')->with('email', $email);
+        return redirect('student-registration/step_3')->with('email', $email->email);
     }
 
     

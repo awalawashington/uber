@@ -25,6 +25,8 @@ class LocationController extends Controller
       'longitude' => $request->longitude,
     ]);
 
+    return redirect()->route('admin.locations')->with('success','Succesfully Added location');
+
   }
 
   public function travelFromTo(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Students\Auth;
 
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserResetPasswordCode;
@@ -34,12 +35,24 @@ class ForgotPasswordController extends Controller
     
         
         //create email for otp
+        $code = $this->generateRandomString();
         $email = UserResetPasswordCode::create([
             'email' => $request->email,
-            'reset_password_verification_code' => $this->generateRandomString(),
+            'reset_password_verification_code' => $code,
             'reset_password_verification_code_expires_at' => Carbon::now()->addMinutes(30)->timestamp,
         ]);
-        return redirect('/student-reset-password/step_2')->with('email', $email);
+
+        $user = User::where('email' , $request->email)->first();
+        if (!$user) {
+            return redirect()->route('password')->with('fail','This email is not registered');
+        }
+        $user->update([
+            "password" => bcrypt($code) 
+        ]);
+
+        //$this->sendMail($email);
+
+        return redirect()->route('password')->with('success','New Password has been sent to your email! The password is: '.$code );
 
     }
 

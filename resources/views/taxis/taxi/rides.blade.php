@@ -20,7 +20,7 @@
         <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
             <div class="container">
                 <div class="row d-flex justify-content-center">
-                @if((auth('taxi')->user()->rides) !== NULL)
+                @if(auth()->user('taxi')->rides->count() == 0)
                 <h1>You havent made a ride yet</h1>
                 @else
                   @foreach(auth('taxi')->user()->rides as $ride)
@@ -50,7 +50,7 @@
                                 {{$ride->created_at}}
                             </p>
                             </div>
-                            <button type="submit" class="btn">Completed</button>
+                  
                         </section>
                     </article>
                   </div>
